@@ -8,7 +8,9 @@ void setup() {
 
 void loop() {
   int valor = analogRead(sensorLuz);
+  long valorPorcentagem = (long)valor*100/1023;
   Serial.print("valor lido luminosidade: ");
-  Serial.println(valor);
+  Serial.print(valorPorcentagem);
+  Serial.println('%');
   delay(1000);
 }
