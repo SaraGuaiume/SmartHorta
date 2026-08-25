@@ -11,32 +11,32 @@
 DHT dht(sensorTemperatura, DHTTYPE);
 
 void lerTemperatura(){
-  double temperature = dht.readTemperature();
+  double temperatura = dht.readTemperature();
 
   Serial.print("Temperatura: ");
-  Serial.print(temperature);
+  Serial.print(temperatura);
   Serial.println("°C");
 
   delay(1000);
 }
 
 void lerLuminosidade(){
-  int valor = analogRead(sensorLuz);
-  long valorPorcentagem = (long)valor*100/1023;
+  int valorluminosidade = analogRead(sensorLuz);
+  long porcentagemLuminosidade = (long)valorluminosidade*100/1023;
   
-  Serial.print("valor lido luminosidade: ");
-  Serial.print(valorPorcentagem);
+  Serial.print("Luminosidade: ");
+  Serial.print(porcentagemLuminosidade);
   Serial.println('%');
 
   delay(1000);
 }
 
 void lerUmidade(){
-  int leituraADC = analogRead(sensorUmidade);
-  float leituraADCPorcentagem = (1023 - leituraADC) * 100.0 / 723.0;
+  int valorUmidade = analogRead(sensorUmidade);
+  float porcentagemUmidade = (1023 - valorUmidade) * 100.0 / 723.0;
 
   Serial.print("Umidade do solo: ");
-  Serial.print(leituraADCPorcentagem);
+  Serial.print(porcentagemUmidade);
   Serial.println("%");
   Serial.println("============================================");
   delay(1000);
