@@ -13,22 +13,22 @@
 LiquidCrystal_I2C lcd(0x27,16,2);
 DHT dht(sensorTemperatura, DHTTYPE);
 
-void lerTemperatura(LiquidCrystal_I2C lcd2){
+void lerTemperatura(){
   double temperatura = dht.readTemperature();
 
   Serial.print("Temperatura: ");
   Serial.print(temperatura);
   Serial.println("°C");
 
-  lcd2.setCursor(0, 0); // coluna 0, linha 0
-  lcd2.print("T: ");
-  lcd2.print(temperatura);
-  lcd2.print("C");
+  lcd.setCursor(0, 0); // coluna 0, linha 0
+  lcd.print("T: ");
+  lcd.print(temperatura);
+  lcd.print("C");
 
   delay(2000);
 }
 
-void lerLuminosidade(LiquidCrystal_I2C lcd2){
+void lerLuminosidade(){
   int valorluminosidade = analogRead(sensorLuz);
   long porcentagemLuminosidade = (long)valorluminosidade*100/1023;
   
@@ -39,15 +39,15 @@ void lerLuminosidade(LiquidCrystal_I2C lcd2){
   Serial.print("Luminosidade: ");
   Serial.println(valorluminosidade);
 
-  lcd2.setCursor(0, 1); // coluna 0, linha 0
-  lcd2.print("L: ");
-  lcd2.print(porcentagemLuminosidade);
-  lcd2.print("%");
+  lcd.setCursor(0, 1); // coluna 0, linha 0
+  lcd.print("L: ");
+  lcd.print(porcentagemLuminosidade);
+  lcd.print("%");
 
   delay(2000);
 }
 
-void lerUmidade(LiquidCrystal_I2C lcd2){
+void lerUmidade(){
   int valorUmidade = analogRead(sensorUmidade);
   long porcentagemUmidade = (1023 - valorUmidade) * 100.0 / 923.0;
 
@@ -59,10 +59,10 @@ void lerUmidade(LiquidCrystal_I2C lcd2){
   Serial.println(valorUmidade);
   Serial.println("============================================");
 
-  lcd2.setCursor(8, 1); // coluna 0, linha 0
-  lcd2.print("U: ");
-  lcd2.print(porcentagemUmidade);
-  lcd2.print("%");
+  lcd.setCursor(8, 1); // coluna 0, linha 0
+  lcd.print("U: ");
+  lcd.print(porcentagemUmidade);
+  lcd.print("%");
 
   delay(2000);
 }
@@ -75,7 +75,7 @@ void setup() {
 }
 
 void loop() {
-  lerTemperatura(lcd);
-  lerLuminosidade(lcd);
-  lerUmidade(lcd);
+  lerTemperatura();
+  lerLuminosidade();
+  lerUmidade();
 }
