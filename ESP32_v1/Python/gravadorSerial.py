@@ -10,8 +10,6 @@ ARQUIVO = r"C:\Users\lgvip\OneDrive\Documentos\PlatformIO\Projects\ESP32_v1\Dado
 
 ser = serial.Serial(PORTA, BAUDRATE)
 
-
-
 arquivoExiste = os.path.exists(ARQUIVO)
 
 with open(ARQUIVO, "a", newline="") as arquivo:
