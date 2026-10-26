@@ -4,13 +4,15 @@
 #include <Adafruit_Sensor.h>
 #include <Wire.h> 
 #include <LiquidCrystal_I2C.h>
-#include <Preferences.h>
 
 #define sensorLuz 36
 #define sensorUmidade1 39
 #define sensorUmidade2 34
 #define sensorUmidade3 35
 #define botao 23
+#define rele 32
+#define boia 18
+#define led 5
 #define sensorTemperatura 4
 #define DHTTYPE DHT22
 
@@ -147,6 +149,11 @@ void setup() {
   dht.begin();
   lcd.init();
   lcd.backlight();
+  pinMode(rele, OUTPUT);
+  pinMode(led, OUTPUT);
+  pinMode(boia, INPUT_PULLUP);
+  digitalWrite(rele, HIGH);
+  digitalWrite(led, LOW);
 }
 
 void loop() {
@@ -170,6 +177,22 @@ void loop() {
     Serial.println(contador);
 
     uint8_t umidade = mudarSensorUmidade(contador);
+
+    int dadosBoia = digitalRead(boia);
+    if (dadosBoia == HIGH) {
+      Serial.println("preenchido"); 
+      digitalWrite(led, HIGH);
+      if (umidade < 50) {
+        digitalWrite(rele, HIGH);    
+      } else {
+        digitalWrite(rele, LOW);    
+      }
+      
+    } else {
+      Serial.println("vazio");
+      digitalWrite(led, LOW);
+      digitalWrite(rele, LOW);    
+    } 
 
     if (contador == 1) gravarPlaca(luminosidade, temperatura, umidade, 0xDD);
     else if (contador == 2) gravarPlaca(luminosidade, temperatura, umidade, 0xEE);
